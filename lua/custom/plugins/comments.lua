@@ -1,5 +1,5 @@
 return {
-  'numTorStr/Comment.nvim',
+  'numToStr/Comment.nvim',
   opts = {
 
   },

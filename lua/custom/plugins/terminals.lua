@@ -1,6 +1,11 @@
 -- vim.keymap.set('t', '<C-m>', 'maybe so', { noremap = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>', { noremap = true })
+vim.keymap.set('t', '<C-h>', '<C-w>h', { noremap = true })
+vim.keymap.set('t', '<C-j>', '<C-w>j', { noremap = true })
+vim.keymap.set('t', '<C-k>', '<C-w>k', { noremap = true })
+vim.keymap.set('t', '<C-l>', '<C-w>l', { noremap = true })
+
 
 local function open_terminal()
   local height = vim.api.nvim_win_get_height(0)
