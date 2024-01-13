@@ -28,6 +28,28 @@ end
 
 vim.api.nvim_create_user_command('Term2', open_terminal_2, {})
 
+local function terminal_below(count)
+  height = vim.api.nvim_win_get_height(0)
+  vim.cmd(height - 15 .. ' split')
+  vim.cmd('wincmd j')
+  for i=1,count do
+    vim.cmd('terminal')
+    if i>1 then
+      print(i)
+      vim.cmd('vs')
+      vim.cmd('wincmd l')
+      vim.cmd('terminal')
+    end
+  end
+end
+
+local function test_stuff(params)
+  print(params)
+end
+
+vim.api.nvim_create_user_command('TestABCD', function (args)
+  terminal_below(2)
+  end, {nargs="*"})
 
 return {
   ""
