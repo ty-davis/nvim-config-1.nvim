@@ -45,11 +45,11 @@ local function v_terminal_below(count)
   end
 end
 
-vim.api.nvim_create_user_command('VTerm', function (args)
+vim.api.nvim_create_user_command('Vterm', function (args)
   v_terminal_below(1)
   end, {nargs="*"})
 
-vim.api.nvim_create_user_command('VTerm2', function (args)
+vim.api.nvim_create_user_command('Vterm2', function (args)
   v_terminal_below(2)
   end, {nargs="*"})
 
