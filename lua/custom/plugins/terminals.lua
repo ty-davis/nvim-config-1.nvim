@@ -1,10 +1,10 @@
 -- vim.keymap.set('t', '<C-m>', 'maybe so', { noremap = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>', { noremap = true })
-vim.keymap.set('t', '<C-h>', '<C-w>h', { noremap = true })
-vim.keymap.set('t', '<C-j>', '<C-w>j', { noremap = true })
-vim.keymap.set('t', '<C-k>', '<C-w>k', { noremap = true })
-vim.keymap.set('t', '<C-l>', '<C-w>l', { noremap = true })
+vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h', { noremap = true })
+vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j', { noremap = true })
+vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k', { noremap = true })
+vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l', { noremap = true })
 
 
 local function terminal_below(count)
