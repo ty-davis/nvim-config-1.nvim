@@ -29,6 +29,13 @@ vim.keymap.set('n', '|', function()
 );
 
 
+local function open_default (state)
+  local node = state.tree:get_node()
+  for k, v in pairs(node) do
+    print(k, v)
+    io.read()
+  end
+end
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
@@ -39,6 +46,24 @@ return {
     "MunifTanjim/nui.nvim",
   },
   config = function ()
-    require('neo-tree').setup({})
+    require('neo-tree').setup({
+      filesystem = {
+        window = {
+          mappings = {
+            ["<S-o>"] = function (state)
+              local node = state.tree:get_node()
+              -- for k, v in pairs(node) do
+              --   print(k, v)
+              -- end
+              if node.ext == 'pdf' then
+                os.execute("sioyek \"" .. node.path .. "\"")
+              else
+                os.execute("\"" .. node.path .. "\"")
+              end
+            end
+          }
+        }
+      }
+    })
   end,
 }
