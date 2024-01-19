@@ -7,6 +7,7 @@ vim.keymap.set('n', '<leader>b', ':Neotree focus buffers right<cr>', {noremap = 
 
 vim.keymap.set('n', '|', function()
   local reveal_file = vim.fn.expand('%:p')
+  print(reveal_file)
   if (reveal_file == '') then
     reveal_file = vim.fn.getcwd()
   else
@@ -48,6 +49,7 @@ return {
   config = function ()
     require('neo-tree').setup({
       filesystem = {
+        bind_to_cwd = true,
         window = {
           mappings = {
             ["<S-o>"] = function (state)

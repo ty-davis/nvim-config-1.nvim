@@ -22,16 +22,7 @@ local function terminal_below(count)
   end
 end
 
-vim.api.nvim_create_user_command('Term', function (args)
-  terminal_below(1)
-  end, {nargs="*"})
-
-vim.api.nvim_create_user_command('Term2', function (args)
-  terminal_below(2)
-  end, {nargs="*"})
-
-
-local function v_terminal_below(count)
+local function v_terminal_right(count)
   local width = vim.api.nvim_win_get_width(0)
   vim.cmd(width - 50 .. 'vsplit')
   vim.cmd('wincmd l')
@@ -45,13 +36,27 @@ local function v_terminal_below(count)
   end
 end
 
-vim.api.nvim_create_user_command('Vterm', function (args)
-  v_terminal_below(1)
+vim.api.nvim_create_user_command('Term', function (args)
+  local vertical = false
+  if string.match(args.args, '-v') then
+    vertical = true
+  end
+
+  local term_count = 1
+  for k,v in pairs(args.fargs) do
+    if tonumber(v) then
+      term_count = v
+      break
+    end
+  end
+
+  if vertical then
+    v_terminal_right(term_count)
+  else
+    terminal_below(term_count)
+  end
   end, {nargs="*"})
 
-vim.api.nvim_create_user_command('Vterm2', function (args)
-  v_terminal_below(2)
-  end, {nargs="*"})
 
 return {
   ""
