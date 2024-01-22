@@ -58,17 +58,9 @@ return {
               --   print(k, v)
               -- end
               if node.ext == 'pdf' then
-                print("It is a pdf")
-                local job = vim.fn.jobstart('notepad.exe')
-                print(job)
-                  -- {
-                  --   cwd = "./",
-                  -- }
-                -- )
-                -- os.execute()
-                  -- "sioyek \"" .. node.path .. "\"",
+                vim.fn.execute('!sioyek "' .. node.path .. '"')
               else
-                os.execute("\"" .. node.path .. "\"")
+                vim.fn.execute('!start "' .. node.path .. '"')
               end
             end
           }
