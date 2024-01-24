@@ -30,13 +30,31 @@ vim.keymap.set('n', '|', function()
 );
 
 
-local function open_default (state)
-  local node = state.tree:get_node()
-  for k, v in pairs(node) do
-    print(k, v)
-    io.read()
-  end
-end
+local open_default = {
+  function (state)
+    local node = state.tree:get_node()
+    if node.ext == 'pdf' then
+      vim.fn.execute('!sioyek "' .. node.path .. '"')
+    else
+      vim.fn.execute('!start "' .. node.path .. '"')
+    end
+  end,
+  desc = "Open with Default Application"
+}
+
+local open_explorer = {
+  function (state)
+    local node = state.tree:get_node()
+    print(node.type)
+    if node.type == 'file' then
+      vim.fn.execute('!explorer /select,"' .. node.path .. '"')
+    else
+      vim.fn.execute('!explorer "' ..node.path ..'"')
+    end
+  end,
+  desc = "Open in File Explorer"
+}
+
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
@@ -52,18 +70,9 @@ return {
         bind_to_cwd = true,
         window = {
           mappings = {
-            ["<S-o>"] = function (state)
-              local node = state.tree:get_node()
-              -- for k, v in pairs(node) do
-              --   print(k, v)
-              -- end
-              if node.ext == 'pdf' then
-                vim.fn.execute('!sioyek "' .. node.path .. '"')
-              else
-                vim.fn.execute('!start "' .. node.path .. '"')
-              end
-            end
-          }
+            ["O"] = open_default,
+            ["E"] = open_explorer,
+          },
         }
       }
     })
