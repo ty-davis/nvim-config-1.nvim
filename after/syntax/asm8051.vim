@@ -97,7 +97,7 @@ syn match asmComment		"[;!|].*" contains=asmTodo,@Spell
 " - ARM comments are not highlighted correctly. For ARM, uncomment the
 "   following two lines and comment the one above.
 "syn match asmComment		"@.*" contains=asmTodo
-"syn match asmComment		"^#.*" contains=asmTodo
+" syn match asmComment		"^#.*" contains=asmTodo
 
 " Advanced users of specific architectures will probably want to change the
 " comment highlighting or use a specific, more comprehensive syntax file.
