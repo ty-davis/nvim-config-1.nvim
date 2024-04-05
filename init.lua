@@ -273,9 +273,9 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
-vim.o.shell = "powershell.exe"
-vim.opt.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
-vim.opt.shellxquote = ''
+-- vim.o.shell = "powershell.exe"
+-- vim.opt.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
+-- vim.opt.shellxquote = ''
 
 -- Set highlight on search
 vim.o.hlsearch = false
