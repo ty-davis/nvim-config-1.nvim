@@ -190,12 +190,34 @@ require('lazy').setup({
   },
 
   {
+    'sainnhe/gruvbox-material',
+    priority = 1000,
+    -- config = function()
+    --   vim.cmd.colorscheme 'gruvbox-material'
+    -- end,
+  },
+  {
+    'Mofiqul/vscode.nvim',
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'vscode'
+    end,
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    priority = 1000,
+  },
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+  },
+  {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+    -- config = function()
+    --   vim.cmd.colorscheme 'onedark'
+    -- end,
   },
 
   {
@@ -205,7 +227,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        -- theme = 'vscode',
         component_separators = '|',
         section_separators = '',
       },
@@ -273,9 +295,9 @@ require('lazy').setup({
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
-vim.o.shell = "powershell.exe"
-vim.opt.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
-vim.opt.shellxquote = ''
+-- vim.o.shell = "powershell.exe"
+-- vim.opt.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
+-- vim.opt.shellxquote = ''
 
 -- Set highlight on search
 vim.o.hlsearch = false
