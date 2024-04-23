@@ -108,7 +108,7 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
 
       -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
+      -- 'rafamadriz/friendly-snippets',
     },
   },
 
@@ -199,9 +199,9 @@ require('lazy').setup({
   {
     'Mofiqul/vscode.nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'vscode'
-    end,
+    -- config = function()
+    --   vim.cmd.colorscheme 'vscode'
+    -- end,
   },
   {
     'EdenEast/nightfox.nvim',
@@ -215,9 +215,9 @@ require('lazy').setup({
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'onedark'
-    -- end,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+    end,
   },
 
   {
@@ -344,6 +344,8 @@ vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
+
+vim.keymap.set({'n', 'v'}, '<leader>cw', function() vim.cmd("VimtexCountWords") end, { noremap = true })
 
 
 

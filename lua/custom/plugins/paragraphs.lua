@@ -6,11 +6,11 @@ local function fix_paragraph()
     -- vim.api.nvim_command('normal 050lf r')
     vim.api.nvim_command('execute "normal" ' .. single_line_command)
   end
-  vim.api.nvim_command('normal o')
+  -- vim.api.nvim_command('normal o')
 end
 
 
-vim.keymap.set('n', '<C-m>', function() fix_paragraph() end, { noremap = true })
+vim.keymap.set('n', '<C-m>', function() fix_paragraph() end, { noremap = true, desc = "Reformat paragraph"})
 
 return {
   ""
