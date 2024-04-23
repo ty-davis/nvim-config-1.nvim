@@ -199,9 +199,9 @@ require('lazy').setup({
   {
     'Mofiqul/vscode.nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'vscode'
-    end,
+    -- config = function()
+    --   vim.cmd.colorscheme 'vscode'
+    -- end,
   },
   {
     'EdenEast/nightfox.nvim',
@@ -215,9 +215,9 @@ require('lazy').setup({
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'onedark'
-    -- end,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+    end,
   },
 
   {
