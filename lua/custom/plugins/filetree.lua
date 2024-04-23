@@ -25,8 +25,8 @@ vim.keymap.set('n', '|', function()
     reveal_file = reveal_file, -- path to file or folder to reveal
     reveal_force_cwd = true,   -- change cwd without asking if needed
   })
-  end--,
-  -- {description: "Open neo-tree at current file or working directory"}
+  end,
+  { desc = "Open neo-tree at current file or working directory"}
 );
 
 

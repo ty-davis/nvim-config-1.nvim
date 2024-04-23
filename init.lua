@@ -108,7 +108,7 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
 
       -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
+      -- 'rafamadriz/friendly-snippets',
     },
   },
 
@@ -344,6 +344,8 @@ vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
+
+vim.keymap.set({'n', 'v'}, '<leader>cw', function() vim.cmd("VimtexCountWords") end, { noremap = true })
 
 
 
