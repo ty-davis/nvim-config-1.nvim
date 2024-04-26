@@ -1,3 +1,0 @@
--- require('local.colorscheme')
-
-return { '' }
