@@ -1,18 +1,52 @@
 local conf = require("telescope.config").values
 
-local function toggle_telescope(harpoon_files)
-    local file_paths = {}
+
+local make_finder = function(harpoon_files)
+    local paths = {}
     for _, item in ipairs(harpoon_files.items) do
-	table.insert(file_paths, item.value)
+    	table.insert(paths, item.value)
     end
 
+    return require("telescope.finders").new_table(
+	{
+	    results = paths
+	}
+    )
+end
+
+local function toggle_telescope(harpoon_files)
     require("telescope.pickers").new({}, {
 	prompt_title = "Harpoon",
-	finder = require("telescope.finders").new_table({
-	    results = file_paths,
-	}),
+	finder = make_finder(harpoon_files),
 	previewer = conf.file_previewer({}),
 	sorter = conf.generic_sorter({}),
+	attach_mappings = function(prompt_buffer_number, map)
+	    map(
+		"i",
+		"<S-d>", -- your mapping here
+		function ()
+		    local state = require("telescope.actions.state")
+		    local selected_entry = state.get_selected_entry()
+		    local current_picker = state.get_current_picker(prompt_buffer_number)
+		    
+		    -- vim.fn.setreg('a', require("harpoon"):list():get(selected_entry.index))
+		    require("harpoon"):list():remove_at(selected_entry.index)
+		    current_picker:refresh(make_finder(require("harpoon"):list()))
+		end
+	    )
+	    map(
+		"i",
+		"<S-p>",
+		function()
+		    local state = require('telescope.actions.state')
+		    local selected_entry = state.get_selected_entry()
+		    local current_picker = state.get_current_picker(prompt_buffer_number)
+
+		    require("harpoon"):list():add({vim.fn.getreg('h')})
+		end
+	    )
+	    return true
+	end
     }):find()
 end
 
@@ -24,11 +58,15 @@ return {
     config = function ()
 	local harpoon = require("harpoon")
 	harpoon:setup()
-
-
     end,
     keys = {
-	{ "<leader>pf", function() require("harpoon"):list():add() end, desc = "Harpoon [F]ile" },
-	{ "<leader>pl", function() toggle_telescope(require("harpoon"):list()) end, desc = "Show Harpoon [L]ist" },
+	{ "<leader>pf", function() require("harpoon"):list():add() end, desc = "Har[P]oon [F]ile" },
+	{ "<leader>pt", function() toggle_telescope(require("harpoon"):list()) end, desc = "Show Har[P]oon [T]elescope" },
+	{ "<leader>pl", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "Show Har[P]oon [L]ist" },
+	{ "<leader>1", function() require("harpoon"):list():select(1) end, desc = "Harpoon to file [1]" },
+	{ "<leader>2", function() require("harpoon"):list():select(2) end, desc = "Harpoon to file [2]" },
+	{ "<leader>3", function() require("harpoon"):list():select(3) end, desc = "Harpoon to file [3]" },
+	{ "<leader>4", function() require("harpoon"):list():select(4) end, desc = "Harpoon to file [4]" },
+	{ "<leader>5", function() require("harpoon"):list():select(5) end, desc = "Harpoon to file [5]" },
     }
 }
