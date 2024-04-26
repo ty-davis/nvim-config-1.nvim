@@ -5,9 +5,8 @@ local make_finder = function(harpoon_files)
     local paths = {}
     for i, item in ipairs(harpoon_files.items) do
     	table.insert(paths, item.value)
-	print(i, item.value, item)
+	-- vim.fn.input({prompt = i .. ' - ' .. item.value})
     end
-    vim.fn.input({prompt = '> '})
 
     return require("telescope.finders").new_table(
 	{
@@ -22,34 +21,35 @@ local function toggle_telescope(harpoon_files)
 	finder = make_finder(harpoon_files),
 	previewer = conf.file_previewer({}),
 	sorter = conf.generic_sorter({}),
-	attach_mappings = function(prompt_buffer_number, map)
-	    map(
-		"i",
-		"<S-d>", -- your mapping here
-		function ()
-		    local state = require("telescope.actions.state")
-		    local selected_entry = state.get_selected_entry()
-		    local current_picker = state.get_current_picker(prompt_buffer_number)
-		    -- vim.fn.setreg('a', require("harpoon"):list():get(selected_entry.index))
-		    require("harpoon"):list():remove_at(selected_entry.index)
-		    current_picker:refresh(make_finder(require("harpoon"):list()))
-		end
-	    )
-	    map(
-		"i",
-		"<S-p>",
-		function()
-		    local state = require('telescope.actions.state')
-		    local selected_entry = state.get_selected_entry()
-		    local current_picker = state.get_current_picker(prompt_buffer_number)
-
-		    require("harpoon"):list():add({'lua\\custom\\plugins\\paragraphs.lua'})
-		    current_picker:refresh(make_finder(require("harpoon"):list()))
-		    print('I think I did something')
-		end
-	    )
-	    return true
-	end
+	-- attach_mappings = function(prompt_buffer_number, map)
+	--     map(
+	-- 	"i",
+	-- 	"<S-d>", -- your mapping here
+	-- 	function ()
+	-- 	    local state = require("telescope.actions.state")
+	-- 	    local selected_entry = state.get_selected_entry()
+	-- 	    local current_picker = state.get_current_picker(prompt_buffer_number)
+	-- 	    -- vim.fn.setreg('a', require("harpoon"):list():get(selected_entry.index))
+	-- 	    -- require("harpoon"):list():remove_at(selected_entry.index)
+	-- 	    require("harpoon"):list():replace_at(selected_entry.index, {})
+	-- 	    current_picker:refresh(make_finder(require("harpoon"):list()))
+	-- 	end
+	--     )
+	--     map(
+	-- 	"i",
+	-- 	"<S-p>",
+	-- 	function()
+	-- 	    local state = require('telescope.actions.state')
+	-- 	    local selected_entry = state.get_selected_entry()
+	-- 	    local current_picker = state.get_current_picker(prompt_buffer_number)
+	--
+	-- 	    require("harpoon"):list():add({'lua\\custom\\plugins\\paragraphs.lua'})
+	-- 	    current_picker:refresh(make_finder(require("harpoon"):list()))
+	-- 	    print('I think I did something')
+	-- 	end
+	--     )
+	--     return true
+	-- end
     }):find()
 end
 
