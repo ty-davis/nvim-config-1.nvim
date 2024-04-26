@@ -3,9 +3,11 @@ local conf = require("telescope.config").values
 
 local make_finder = function(harpoon_files)
     local paths = {}
-    for _, item in ipairs(harpoon_files.items) do
+    for i, item in ipairs(harpoon_files.items) do
     	table.insert(paths, item.value)
+	print(i, item.value, item)
     end
+    vim.fn.input({prompt = '> '})
 
     return require("telescope.finders").new_table(
 	{
@@ -28,7 +30,6 @@ local function toggle_telescope(harpoon_files)
 		    local state = require("telescope.actions.state")
 		    local selected_entry = state.get_selected_entry()
 		    local current_picker = state.get_current_picker(prompt_buffer_number)
-		    
 		    -- vim.fn.setreg('a', require("harpoon"):list():get(selected_entry.index))
 		    require("harpoon"):list():remove_at(selected_entry.index)
 		    current_picker:refresh(make_finder(require("harpoon"):list()))
@@ -42,7 +43,9 @@ local function toggle_telescope(harpoon_files)
 		    local selected_entry = state.get_selected_entry()
 		    local current_picker = state.get_current_picker(prompt_buffer_number)
 
-		    require("harpoon"):list():add({vim.fn.getreg('h')})
+		    require("harpoon"):list():add({'lua\\custom\\plugins\\paragraphs.lua'})
+		    current_picker:refresh(make_finder(require("harpoon"):list()))
+		    print('I think I did something')
 		end
 	    )
 	    return true

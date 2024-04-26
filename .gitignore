@@ -5,4 +5,4 @@ nvim
 lazy-lock.json
 
 lua/custom/plugins/local_*
-local/**/*
+lua/local/**/*
