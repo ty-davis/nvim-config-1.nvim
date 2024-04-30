@@ -108,7 +108,7 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
 
       -- Adds a number of user-friendly snippets
-      -- 'rafamadriz/friendly-snippets',
+      'rafamadriz/friendly-snippets',
     },
   },
 
@@ -224,12 +224,18 @@ require('lazy').setup({
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         -- theme = 'vscode',
         component_separators = '|',
         section_separators = '',
+      },
+      sections = {
+        lualine_z = {'location', function() return os.date('%a %D %R') end }
       },
     },
   },
