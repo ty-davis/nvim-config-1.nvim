@@ -192,16 +192,14 @@ require('lazy').setup({
   {
     'sainnhe/gruvbox-material',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'gruvbox-material'
-    -- end,
+  },
+  {
+    'sainnhe/sonokai',
+    priority = 1000,
   },
   {
     'Mofiqul/vscode.nvim',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'vscode'
-    -- end,
   },
   {
     'EdenEast/nightfox.nvim',
@@ -305,11 +303,14 @@ require('lazy').setup({
 -- vim.opt.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
 -- vim.opt.shellxquote = ''
 
+vim.o.wrap = false
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -453,7 +454,7 @@ local function telescope_live_grep_open_files()
   }
 end
 
-local function telescope_find_hidden_files() 
+local function telescope_find_hidden_files()
   require('telescope.builtin').find_files({
     hidden = true
   })
