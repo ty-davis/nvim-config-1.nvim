@@ -108,7 +108,7 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
 
       -- Adds a number of user-friendly snippets
-      -- 'rafamadriz/friendly-snippets',
+      'rafamadriz/friendly-snippets',
     },
   },
 
@@ -192,16 +192,14 @@ require('lazy').setup({
   {
     'sainnhe/gruvbox-material',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'gruvbox-material'
-    -- end,
+  },
+  {
+    'sainnhe/sonokai',
+    priority = 1000,
   },
   {
     'Mofiqul/vscode.nvim',
     priority = 1000,
-    -- config = function()
-    --   vim.cmd.colorscheme 'vscode'
-    -- end,
   },
   {
     'EdenEast/nightfox.nvim',
@@ -224,12 +222,19 @@ require('lazy').setup({
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      'daurnimator/lua-http',
+    },
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         -- theme = 'vscode',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = ' | ',
+        section_separators = { left = '', right = '' },
+      },
+      sections = {
+        lualine_z = {'location', function() return os.date('%a %D %R') end, }
       },
     },
   },
@@ -240,6 +245,7 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
+    commit = '29be0919b91fb59eca9e90690d76014233392bef',
     opts = {},
   },
 
@@ -299,11 +305,14 @@ require('lazy').setup({
 -- vim.opt.shellcmdflag = "-nologo -noprofile -ExecutionPolicy RemoteSigned -command"
 -- vim.opt.shellxquote = ''
 
+vim.o.wrap = false
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -446,16 +455,24 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
+
+local function telescope_find_hidden_files()
+  require('telescope.builtin').find_files({
+    hidden = true
+  })
+end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>hf', telescope_find_hidden_files, { desc = '[S]earch [H]idden files' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>st', require('telescope.builtin').treesitter, { desc = '[S]earch [T]reesitter'})
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -582,6 +599,7 @@ require('which-key').register {
   ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+  ['<leader>p'] = { name = 'Har[P]oon', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
@@ -701,6 +719,9 @@ cmp.setup {
     { name = 'path' },
   },
 }
+
+require('local')
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

@@ -8,9 +8,9 @@ vim.keymap.set('t', '<C-l>', '<C-\\><C-n><C-w>l', { noremap = true })
 
 
 local function terminal_below(count)
-  local height = vim.api.nvim_win_get_height(0)
-  vim.cmd(height - 15 .. ' split')
-  vim.cmd('wincmd j')
+  vim.cmd('split')
+  vim.cmd('wincmd J')
+  vim.cmd('res 15')
   for i=1,count do
     vim.cmd('terminal')
     if i>1 then
@@ -23,9 +23,10 @@ local function terminal_below(count)
 end
 
 local function v_terminal_right(count)
-  local width = vim.api.nvim_win_get_width(0)
-  vim.cmd(width - 50 .. 'vsplit')
-  vim.cmd('wincmd l')
+  vim.cmd('vsplit')
+  vim.cmd('wincmd L')
+  vim.cmd('vert res 50')
+  -- vim.cmd('wincmd l')
   for i=1,count do
     vim.cmd('terminal')
     if i>1 then
