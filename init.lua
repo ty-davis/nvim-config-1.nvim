@@ -224,16 +224,17 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     dependencies = {
       'nvim-tree/nvim-web-devicons',
+      'daurnimator/lua-http',
     },
     opts = {
       options = {
         icons_enabled = true,
         -- theme = 'vscode',
-        component_separators = '|',
-        section_separators = '',
+        component_separators = ' | ',
+        section_separators = { left = '', right = '' },
       },
       sections = {
-        lualine_z = {'location', function() return os.date('%a %D %R') end }
+        lualine_z = {'location', function() return os.date('%a %D %R') end, }
       },
     },
   },
@@ -244,6 +245,7 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
     main = 'ibl',
+    commit = '29be0919b91fb59eca9e90690d76014233392bef',
     opts = {},
   },
 
