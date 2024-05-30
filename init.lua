@@ -354,7 +354,7 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
 
-vim.keymap.set({'n', 'v'}, '<leader>cw', function() vim.cmd("VimtexCountWords") end, { noremap = true })
+vim.keymap.set({'n', 'v'}, '<leader>cw', function() vim.cmd("VimtexCountWords") end, { noremap = true, desc = "[C]ount [W]ords"})
 
 
 

@@ -16,14 +16,14 @@ local header = {
         -- r╝ : 0x255D  h
         -- r╚ : 0x255A  i
         --
-        [[ ██   ██║ ███████║  █████    ███║  ███║ ██║ ██    ██║ ]],
-        [[ ███  ██║ ██═════╝ ██ ██   ███║  ███║ ██║ ███  ███║ ]],
-        [[ ████ ██║ ██       ███║  ███║  ███║  ███║ ██║ ████████║ ]],
-        [[ ██████║ ██████║  ███║  ███║  ███║  ███║ ██║ ████████║ ]],
-        [[ ██║████║ ██════╝  ███║  ███║  ██ ██  ██║ ██║██ ██║ ]],
-        [[ ██║ ███║ ██       ██ ██    █████   ██║ ██║     ██║ ]],
-        [[ ██║  ██║ ███████║  █████      ███    ██║ ██║     ██║ ]],
-        [[ ╚═╝   ╚═╝ ╚══════╝   ═════        ═══     ╚═╝ ╚═╝     ╚═╝ ]],
+        [[ ██   ██║ ███████║  █████   ███║  ███║ ██║ ██    ██║ ]],
+        [[ ███  ██║ ██═════╝ ██ ██  ███║  ███║ ██║ ███  ███║ ]],
+        [[ ████ ██║ ██       ███║  ███║ ███║  ███║ ██║ ████████║ ]],
+        [[ ██████║ ██████║  ███║  ███║ ███║  ███║ ██║ ████████║ ]],
+        [[ ██║████║ ██════╝  ███║  ███║ ██ ██  ██║ ██║██ ██║ ]],
+        [[ ██║ ███║ ██       ██ ██   █████   ██║ ██║     ██║ ]],
+        [[ ██║  ██║ ███████║  █████     ███    ██║ ██║     ██║ ]],
+        [[ ╚═╝   ╚═╝ ╚══════╝   ═════       ═══     ╚═╝ ╚═╝     ╚═╝ ]],
     },
     opts = {
         position = "center",
@@ -78,7 +78,7 @@ local function file_button(fn, sc, short_fn, autocd)
     local file_button_el = require("alpha.themes.dashboard").button(sc, ico_txt .. short_fn, "<cmd>e " .. vim.fn.fnameescape(fn) .. cd_cmd .." <CR>")
     local fn_start = short_fn:match(".*[/\\]")
     if fn_start ~= nil then
-        table.insert(fb_hl, { "SpecialComment", #ico_txt - 2, #fn_start + #ico_txt })
+        table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt })
     end
     file_button_el.opts.hl = fb_hl
     return file_button_el
@@ -153,7 +153,7 @@ local section_mru = {
             type = "text",
             val = "Recent files",
             opts = {
-                hl = "SpecialComment",
+                hl = "Comment",
                 shrink_margin = false,
                 position = "center",
             },
@@ -185,7 +185,7 @@ local function make_buttons()
         type = "group",
         position = "center",
         val = {
-            { type = "text", val = "Harpoon", opts = { hl = "SpecialComment", position = "center" } },
+            { type = "text", val = "Harpoon", opts = { hl = "Comment", position = "center" } },
             { type = "padding", val = 1 },
         }
     }
@@ -195,12 +195,12 @@ local function make_buttons()
     end
     tableInsertMult(buttons.val,
         { type = "padding", val = 1 },
-        { type = "text", val = "Quick Links", opts = { hl = "SpecialComment", position = "center"} },
+        { type = "text", val = "Quick Links", opts = { hl = "Comment", position = "center"} },
         { type = "padding", val = 1 },
         dashboard.button( 'n', '  New file', ':ene <BAR> startinsert <CR>'),
         dashboard.button( 'c', '  Configuration', '<cmd>cd $NVIM_CONFIG <BAR> e init.lua<CR>'),
         dashboard.button( 'l', 'z  Lazy', ':Lazy<CR>'),
-        dashboard.button( 'm', 'm  Mason', ':Lazy<CR>'),
+        dashboard.button( 'm', 'm  Mason', ':Mason<CR>'),
         dashboard.button( 'q', '×  Quit', ':qa<CR>')
     )
 
