@@ -10,7 +10,7 @@ local function fix_paragraph()
 end
 
 
-vim.keymap.set('n', '<C-m>', function() fix_paragraph() end, { noremap = true, desc = "Reformat paragraph"})
+vim.keymap.set('n', '<C-n>', function() fix_paragraph() end, { noremap = true, desc = "Reformat paragraph"})
 
 return {
   ""
