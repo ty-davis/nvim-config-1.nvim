@@ -231,7 +231,7 @@ require('lazy').setup({
         icons_enabled = true,
         -- theme = 'vscode',
         component_separators = ' | ',
-        section_separators = { left = '', right = '' },
+        section_separators = { left = '║', right = '║' },
       },
       sections = {
         lualine_z = {'location', function() return os.date('%a %D %R') end, }
