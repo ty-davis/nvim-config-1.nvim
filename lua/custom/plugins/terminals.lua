@@ -58,6 +58,51 @@ vim.api.nvim_create_user_command('Term', function (args)
   end
   end, {nargs="*"})
 
+local function send_to_terminal(cmd)
+  local term_found = false
+  local wins_list = vim.api.nvim_tabpage_list_wins(vim.api.nvim_get_current_tabpage())
+
+  for _, win in ipairs(wins_list) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.bo[buf].buftype == 'terminal' then
+      term_found = true
+      vim.api.nvim_set_current_win(win)
+      break
+    end
+  end
+
+  if not term_found then
+    vim.cmd('Term')
+  end
+  vim.api.nvim_feedkeys('i' .. cmd .. '\r', 'n', false)
+end
+
+local function run_file()
+  local uname = vim.loop.os_uname()
+  local is_windows = uname.sysname:match("Windows")
+
+  local cmd = ''
+  local filename = vim.fn.expand("%:p")
+  if vim.bo.filetype == 'python' then
+    local python_suffix = ''
+    if is_windows then
+      python_suffix = '3'
+    end
+    cmd = 'python' .. python_suffix .. ' "' .. filename .. '"'
+  elseif vim.bo.filetype == 'c' then
+    if is_windows then
+      cmd = 'gcc "' .. filename .. '" ; ./a.exe'
+    else
+      cmd = 'gcc "' .. filename .. '" && ./a.out'
+    end
+
+  end
+  send_to_terminal(cmd)
+end
+
+vim.keymap.set('n', '<leader>f', function () run_file() end, {desc="Run python file"})
+
+
 
 return {
   ""
