@@ -85,7 +85,7 @@ local function run_file()
   local filename = vim.fn.expand("%:p")
   if vim.bo.filetype == 'python' then
     local python_suffix = ''
-    if is_windows then
+    if not is_windows then
       python_suffix = '3'
     end
     cmd = 'python' .. python_suffix .. ' "' .. filename .. '"'
