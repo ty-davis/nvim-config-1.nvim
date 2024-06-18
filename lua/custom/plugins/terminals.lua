@@ -95,6 +95,12 @@ local function run_file()
     else
       cmd = 'gcc "' .. filename .. '" && ./a.out'
     end
+  elseif vim.bo.filetype == 'cpp' then
+    if is_windows then
+      cmd = 'g++ "' .. filename .. '" ; ./a.exe'
+    else
+      cmd = 'g++ "' .. filename .. '" && ./a.out'
+    end
 
   end
   send_to_terminal(cmd)
