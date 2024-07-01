@@ -106,7 +106,7 @@ local function run_file()
   send_to_terminal(cmd)
 end
 
-local function run_script()
+local function run_script(script_name)
   local uname = vim.loop.os_uname()
   local is_windows = uname.sysname:match("Windows")
 
@@ -114,16 +114,17 @@ local function run_script()
   local filename = vim.fn.expand("%:p")
   if vim.bo.filetype == 'python' then
     if is_windows then
-      cmd = './run.ps1'
+      cmd = './' .. script_name .. '.ps1'
     else 
-      cmd = './run.sh'
+      cmd = './' .. script_name .. '.sh'
     end
   end
   send_to_terminal(cmd)
 end
 
 vim.keymap.set('n', '<leader>rf', function () run_file() end, {desc="[R]un [F]ile"})
-vim.keymap.set('n', '<leader>rs', function () run_script() end, {desc="[R]un [S]cript"})
+vim.keymap.set('n', '<leader>rs', function () run_script('run') end, {desc="[R]un [S]cript"})
+vim.keymap.set('n', '<leader>rt', function () run_script('run_test') end, {desc="[R]un [T]est script"})
 
 
 
