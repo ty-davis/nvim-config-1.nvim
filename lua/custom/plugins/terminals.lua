@@ -111,13 +111,10 @@ local function run_script(script_name)
   local is_windows = uname.sysname:match("Windows")
 
   local cmd = ''
-  local filename = vim.fn.expand("%:p")
-  if vim.bo.filetype == 'python' then
-    if is_windows then
-      cmd = './' .. script_name .. '.ps1'
-    else 
-      cmd = './' .. script_name .. '.sh'
-    end
+  if is_windows then
+    cmd = './' .. script_name .. '.ps1'
+  else
+    cmd = './' .. script_name .. '.sh'
   end
   send_to_terminal(cmd)
 end
