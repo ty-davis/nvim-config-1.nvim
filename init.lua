@@ -358,6 +358,29 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
 
 vim.keymap.set({'n', 'v'}, '<leader>cw', function() vim.cmd("VimtexCountWords") end, { noremap = true, desc = "[C]ount [W]ords"})
 
+-- Toggle nvim cmp
+vim.keymap.set('n', '<leader>tc', function()
+    -- require('cmp').setup.buffer { enabled = false }
+  local cmp = require('cmp')
+
+  local cmp_state = vim.b.cmp_enabled
+  if cmp_state == nil then
+    cmp_state = true
+  end
+
+  cmp_state = not cmp_state
+  vim.b.cmp_enabled = cmp_state
+
+  cmp.setup.buffer({ enabled = cmp_state })
+
+  if cmp_state then
+    print("CMP enabled")
+  else
+    print("CMP disabled")
+  end
+
+  end, {noremap = true, desc = "[T]oggle [C]mp"})
+
 
 
 
