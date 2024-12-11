@@ -16,6 +16,4 @@ end
 vim.keymap.set('n', '<C-n>', function() fix_paragraph(true) end, { noremap = true, desc = "Reformat paragraph"})
 vim.keymap.set('v', '<C-n>', function() fix_paragraph(false) end, { noremap = true, desc = "Reformat selection"})
 
-return {
-  ""
-}
+return {}

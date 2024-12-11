@@ -125,6 +125,4 @@ vim.keymap.set('n', '<leader>rt', function () run_script('run_test') end, {desc=
 
 
 
-return {
-  ""
-}
+return {}
