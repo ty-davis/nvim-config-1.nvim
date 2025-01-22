@@ -723,6 +723,10 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+require("lspconfig").clangd.setup {
+  cmd = { "clangd", "--compile-commands-dir=/home/tydavis/ros2_ws/build/" }
+}
+
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
