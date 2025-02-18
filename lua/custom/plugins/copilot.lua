@@ -33,7 +33,6 @@ return {
                 mappings = {
                     reset = {
                         normal = "<leader>ccl",
-                        insert = "<leader>ccl"
                     }
                 },
                 prompts = {
