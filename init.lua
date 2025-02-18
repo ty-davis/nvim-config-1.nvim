@@ -779,6 +779,8 @@ cmp.setup {
   },
 }
 
+vim.g.neovide_scale_factor = 0.8
+
 require('local')
 
 
