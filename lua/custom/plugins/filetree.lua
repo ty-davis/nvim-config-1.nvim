@@ -45,12 +45,21 @@ local open_default = {
 
 local open_explorer = {
   function (state)
+    local is_windows = vim.loop.os_uname().sysname:match("Windows");
     local node = state.tree:get_node()
     print(node.type)
     if node.type == 'file' then
-      vim.fn.execute('!explorer /select,"' .. node.path .. '"')
+      if is_windows then
+        vim.fn.execute('!explorer /select,"' .. node.path .. '"')
+      else
+        vim.fn.execute('!open "' .. vim.fn.fnamemodify(node.path, ":h") .. '"')
+      end
     else
-      vim.fn.execute('!explorer "' ..node.path ..'"')
+      if is_windows then
+        vim.fn.execute('!explorer "' ..node.path ..'"')
+      else
+        vim.fn.execute('!open "' .. node.path .. '"')
+      end
     end
   end,
   desc = "Open in File Explorer"
