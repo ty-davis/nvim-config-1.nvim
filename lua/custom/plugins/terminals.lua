@@ -101,7 +101,8 @@ local function run_file()
     else
       cmd = 'g++ "' .. filename .. '" && ./a.out'
     end
-
+  elseif vim.bo.filetype == 'javascript' then
+    cmd = 'node "' .. filename .. '"'
   end
   send_to_terminal(cmd)
 end
