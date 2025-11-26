@@ -6,6 +6,9 @@ vim.g.maplocalleader = ' '
 vim.g.vimtex_quickfix_enabled = 0
 vim.g.vimtex_view_general_viewer = "sioyek"
 
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
