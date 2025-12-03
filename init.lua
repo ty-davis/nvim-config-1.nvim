@@ -115,6 +115,12 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Move by visual lines instead of logical lines when text is wrapped
+vim.keymap.set('n', 'j', 'gj', { desc = 'Move down by visual line' })
+vim.keymap.set('n', 'k', 'gk', { desc = 'Move up by visual line' })
+vim.keymap.set('v', 'j', 'gj', { desc = 'Move down by visual line' })
+vim.keymap.set('v', 'k', 'gk', { desc = 'Move up by visual line' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -829,7 +835,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
+        preset = 'enter',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
