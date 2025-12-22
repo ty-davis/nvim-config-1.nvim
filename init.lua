@@ -459,6 +459,10 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>hf', function()
         builtin.find_files { hidden = true }
       end, { desc = 'Search [H]idden [F]iles' })
+
+      local wp = require 'wordpress'
+      vim.lsp.config('intelephense', wp.intelephense)
+      vim.lsp.enable 'intelephense'
     end,
   },
 
