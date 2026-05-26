@@ -78,7 +78,7 @@ local function send_to_terminal(cmd)
 end
 
 local function run_file()
-  local uname = vim.loop.os_uname()
+  local uname = vim.uv.os_uname()
   local is_windows = uname.sysname:match("Windows")
 
   local cmd = ''
@@ -108,7 +108,7 @@ local function run_file()
 end
 
 local function run_script(script_name)
-  local uname = vim.loop.os_uname()
+  local uname = vim.uv.os_uname()
   local is_windows = uname.sysname:match("Windows")
 
   local cmd = ''

@@ -45,7 +45,7 @@ local open_default = {
 
 local open_explorer = {
   function (state)
-    local is_windows = vim.loop.os_uname().sysname:match("Windows");
+    local is_windows = vim.uv.os_uname().sysname:match("Windows");
     local node = state.tree:get_node()
     print(node.type)
     if node.type == 'file' then
