@@ -326,11 +326,15 @@ local function make_buttons()
   return buttons
 end
 
+
 return {
-  'goolord/alpha-nvim',
-  priority = 50,
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  config = function()
+  repo = Gh 'goolord/alpha-nvim',
+  requires = {
+    Gh 'nvim-tree/nvim-web-devicons',
+    Gh 'nvim-lua/plenary.nvim',
+    Gh 'ThePrimeagen/harpoon',
+  },
+  setup = function()
     local alpha = require 'alpha'
     local theta = require 'alpha.themes.theta'
     -- local dashboard = require('alpha.themes.dashboard')

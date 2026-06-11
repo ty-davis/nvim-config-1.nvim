@@ -124,6 +124,4 @@ vim.keymap.set('n', '<leader>rf', function () run_file() end, {desc="[R]un [F]il
 vim.keymap.set('n', '<leader>rs', function () run_script('run') end, {desc="[R]un [S]cript"})
 vim.keymap.set('n', '<leader>rt', function () run_script('run_test') end, {desc="[R]un [T]est script"})
 
-
-
 return {}

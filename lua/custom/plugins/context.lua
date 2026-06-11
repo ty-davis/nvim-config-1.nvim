@@ -1,6 +1,6 @@
 return {
-  'wellle/context.vim',
-  init = function()
+  repo = Gh 'wellle/context.vim',
+  setup = function()
     vim.g.context_enabled = 0
-  end,
+  end
 }

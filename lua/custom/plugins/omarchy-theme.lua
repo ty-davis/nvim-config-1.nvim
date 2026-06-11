@@ -44,10 +44,11 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end,
 })
 
-local result = {}
-for _, spec in ipairs(specs) do
-  if type(spec) == 'table' and type(spec[1]) == 'string' and not spec[1]:match '^LazyVim/' then
-    table.insert(result, spec)
-  end
-end
-return result
+-- local result = {}
+-- for _, spec in ipairs(specs) do
+--   if type(spec) == 'table' and type(spec[1]) == 'string' and not spec[1]:match '^LazyVim/' then
+--     table.insert(result, spec)
+--   end
+-- end
+-- return result
+return {}

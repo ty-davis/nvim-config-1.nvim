@@ -1,27 +1,27 @@
 return {
   {
-    'zbirenbaum/copilot.lua',
-    config = function()
-      require('copilot').setup {
+    repo = Gh 'zbirenbaum/copilot.lua',
+    setup = function()
+      require('copilot').setup({
         suggestion = {
           keymap = {
             accept = '<C-h>',
             next = '<C-j>',
             prev = '<C-k>',
-          },
-        },
-      }
-    end,
+          }
+        }
+      })
+    end
   },
   {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    dependencies = {
-      { 'zbirenbaum/copilot.lua' },
-      { 'nvim-lua/plenary.nvim', branch = 'master' },
+    repo = Gh 'CopilotC-Nvim/CopilotChat.nvim',
+    requires = {
+      Gh 'zbirenbaum/copilot.lua',
+      Gh 'nvim-lua/plenary.nvim'
     },
-    config = function()
+    setup = function()
       require('CopilotChat').setup {
-        model = 'claude-sonnet-4.5',
+        model = 'claude-sonnet-4.6',
         window = {
           layout = 'float',
           border = 'rounded',
@@ -32,6 +32,7 @@ return {
         mappings = {
           reset = {
             normal = '<leader>ccl',
+            callback = function(chat) chat:reset() end,
           },
         },
         prompts = {
@@ -40,13 +41,14 @@ return {
           },
         },
       }
+      -- set some keymaps
       vim.api.nvim_set_keymap('n', '<leader>cc<CR>', '<cmd>lua require("CopilotChat").open()<CR>', { noremap = true, silent = true })
       vim.keymap.set('n', '<leader>ccq', function()
         local input = vim.fn.input 'Quick chat: '
         if input ~= nil then
-          require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+          require('CopilotChat').ask(input, { context = 'buffer' })
         end
       end, { noremap = true, silent = true, desc = 'CopilotChat - Quick chat' })
-    end,
+    end
   },
 }
