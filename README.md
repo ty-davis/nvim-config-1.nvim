@@ -1,3 +1,11 @@
+# nvim-config-1.nvim
+
+This is my personalization of the `kickstart.nvim` project
+for the neovim editor. It includes a few plugins that
+I have enjoyed using, and a small rework of the ./lua/custom/plugins/init.lua
+file to rework some of the dependency resolution process.
+
+
 # kickstart.nvim
 
 ## Introduction
