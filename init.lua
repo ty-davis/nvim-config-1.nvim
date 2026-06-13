@@ -667,6 +667,16 @@ do
   -- Automatically install LSPs and related tools to stdpath for Neovim
   require('mason').setup {}
 
+
+  for name, server in pairs(servers) do
+    vim.lsp.config(name, server)
+    -- vim.lsp.enable(name)
+  end
+
+  require('mason-lspconfig').setup {
+    -- automatic_enable = true is already default
+  }
+
   -- Ensure the servers and tools above are installed
   --
   -- To check the current status of installed tools and/or manually install
@@ -680,11 +690,6 @@ do
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-  for name, server in pairs(servers) do
-    vim.lsp.config(name, server)
-    vim.lsp.enable(name)
-  end
 end
 
 -- ============================================================
