@@ -1,7 +1,5 @@
 local path_ok, plenary_path = pcall(require, 'plenary.path')
-if not path_ok then
-  return
-end
+if not path_ok then return end
 
 local potential_headers = {
   -- r : 0xE0B8  a
@@ -138,6 +136,40 @@ local potential_headers = {
     [[ ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
     [[                                                                       ]],
   },
+  {
+    [[                                                                                   ]],
+    [[     /\__\         /\  \         /\  \         /\__\          ___        /\__\     ]],
+    [[    /::|  |       /::\  \       /::\  \       /:/  /         /\  \      /::|  |    ]],
+    [[   /:|:|  |      /:/\:\  \     /:/\:\  \     /:/  /          \:\  \    /:|:|  |    ]],
+    [[  /:/|:|  |__   /::\~\:\  \   /:/  \:\  \   /:/__/  ___      /::\__\  /:/|:|__|__  ]],
+    [[ /:/ |:| /\__\ /:/\:\ \:\__\ /:/__/ \:\__\  |:|  | /\__\  __/:/\/__/ /:/ |::::\__\ ]],
+    [[ \/__|:|/:/  / \:\~\:\ \/__/ \:\  \ /:/  /  |:|  |/:/  / /\/:/  /    \/__/~~/:/  / ]],
+    [[     |:/:/  /   \:\ \:\__\    \:\  /:/  /   |:|__/:/  /  \::/__/           /:/  /  ]],
+    [[     |::/  /     \:\ \/__/     \:\/:/  /     \::::/__/    \:\__\          /:/  /   ]],
+    [[     /:/  /       \:\__\        \::/  /       ~~~~         \/__/         /:/  /    ]],
+    [[     \/__/         \/__/         \/__/                                   \/__/     ]],
+    [[                                                                                   ]],
+  },
+  {
+    [[/\\\\\     /\\\                               /\\\        /\\\                                 ]],
+    [[\/\\\\\\   \/\\\                              \/\\\       \/\\\                                ]],
+    [[ \/\\\/\\\  \/\\\                              \//\\\      /\\\   /\\\                         ]],
+    [[  \/\\\//\\\ \/\\\     /\\\\\\\\      /\\\\\     \//\\\    /\\\   \///     /\\\\\  /\\\\\      ]],
+    [[   \/\\\\//\\\\/\\\   /\\\/////\\\   /\\\///\\\    \//\\\  /\\\     /\\\  /\\\///\\\\\///\\\   ]],
+    [[    \/\\\ \//\\\/\\\  /\\\\\\\\\\\   /\\\  \//\\\    \//\\\/\\\     \/\\\ \/\\\ \//\\\  \/\\\  ]],
+    [[     \/\\\  \//\\\\\\ \//\\///////   \//\\\  /\\\      \//\\\\\      \/\\\ \/\\\  \/\\\  \/\\\ ]],
+    [[      \/\\\   \//\\\\\  \//\\\\\\\\\\  \///\\\\\/        \//\\\       \/\\\ \/\\\  \/\\\  \/\\\]],
+    [[       \///     \/////    \//////////     \/////           \///        \///  \///   \///   \///]],
+  },
+  {
+    [[                                                                  ]],
+    [[     _/      _/                      _/      _/  _/               ]],
+    [[    _/_/    _/    _/_/      _/_/    _/      _/      _/_/_/  _/_/  ]],
+    [[   _/  _/  _/  _/_/_/_/  _/    _/  _/      _/  _/  _/    _/    _/ ]],
+    [[  _/    _/_/  _/        _/    _/    _/  _/    _/  _/    _/    _/  ]],
+    [[ _/      _/    _/_/_/    _/_/        _/      _/  _/    _/    _/   ]],
+    [[                                                                  ]],
+  },
 }
 
 local header = {
@@ -161,9 +193,7 @@ local nvim_web_devicons = {
 local function get_extension(fn)
   local match = fn:match '^.+(%..+)$'
   local ext = ''
-  if match ~= nil then
-    ext = match:sub(2)
-  end
+  if match ~= nil then ext = match:sub(2) end
   return ext
 end
 
@@ -184,13 +214,9 @@ local function file_button(fn, sc, short_fn, autocd)
     local ico, hl = icon(fn)
     local hl_option_type = type(nvim_web_devicons.highlight)
     if hl_option_type == 'boolean' then
-      if hl and nvim_web_devicons.highlight then
-        table.insert(fb_hl, { hl, 0, #ico })
-      end
+      if hl and nvim_web_devicons.highlight then table.insert(fb_hl, { hl, 0, #ico }) end
     end
-    if hl_option_type == 'string' then
-      table.insert(fb_hl, { nvim_web_devicons.highlight, 0, #ico })
-    end
+    if hl_option_type == 'string' then table.insert(fb_hl, { nvim_web_devicons.highlight, 0, #ico }) end
     ico_txt = ico .. '  '
   else
     ico_txt = ''
@@ -198,9 +224,7 @@ local function file_button(fn, sc, short_fn, autocd)
   local cd_cmd = (autocd and ' | cd %:p:h' or '')
   local file_button_el = require('alpha.themes.dashboard').button(sc, ico_txt .. short_fn, '<cmd>e ' .. vim.fn.fnameescape(fn) .. cd_cmd .. ' <CR>')
   local fn_start = short_fn:match '.*[/\\]'
-  if fn_start ~= nil then
-    table.insert(fb_hl, { 'Comment', #ico_txt - 2, #fn_start + #ico_txt })
-  end
+  if fn_start ~= nil then table.insert(fb_hl, { 'Comment', #ico_txt - 2, #fn_start + #ico_txt }) end
   file_button_el.opts.hl = fb_hl
   return file_button_el
 end
@@ -208,9 +232,7 @@ end
 local default_mru_ignore = { 'gitcommit' }
 
 local mru_opts = {
-  ignore = function(path, ext)
-    return (string.find(path, 'COMMIT_EDITMSG')) or (vim.tbl_contains(default_mru_ignore, ext))
-  end,
+  ignore = function(path, ext) return (string.find(path, 'COMMIT_EDITMSG')) or (vim.tbl_contains(default_mru_ignore, ext)) end,
   autocd = false,
 }
 
@@ -223,9 +245,7 @@ local function mru(start, cwd, items_number, opts)
 
   local oldfiles = {}
   for _, v in pairs(vim.v.oldfiles) do
-    if #oldfiles == items_number then
-      break
-    end
+    if #oldfiles == items_number then break end
     local cwd_cond
     if not cwd then
       cwd_cond = true
@@ -233,9 +253,7 @@ local function mru(start, cwd, items_number, opts)
       cwd_cond = vim.startswith(v, cwd)
     end
     local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
-    if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
-      oldfiles[#oldfiles + 1] = v
-    end
+    if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then oldfiles[#oldfiles + 1] = v end
   end
   local target_width = 35
 
@@ -250,9 +268,7 @@ local function mru(start, cwd, items_number, opts)
 
     if #short_fn > target_width then
       short_fn = plenary_path.new(short_fn):shorten(1, { -2, -1 })
-      if #short_fn > target_width then
-        short_fn = plenary_path.new(short_fn):shorten(1, { -1 })
-      end
+      if #short_fn > target_width then short_fn = plenary_path.new(short_fn):shorten(1, { -1 }) end
     end
 
     local shortcut = tostring(i + start - 1)
@@ -282,9 +298,7 @@ local section_mru = {
     { type = 'padding', val = 1 },
     {
       type = 'group',
-      val = function()
-        return { mru(0, cdir) }
-      end,
+      val = function() return { mru(0, cdir) } end,
       opts = { shrink_margin = false },
     },
   },
@@ -325,7 +339,6 @@ local function make_buttons()
 
   return buttons
 end
-
 
 return {
   repo = Gh 'goolord/alpha-nvim',
